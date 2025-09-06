@@ -115,7 +115,7 @@ def activate(request, uidb64, token):
     
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'account/dashboard.html')
+    return render(request, 'home.html')
 
 def forgetPassword(request):
     if request.method =='POST':
@@ -184,4 +184,4 @@ def resetPassword(request):
     
 @login_required(login_url='login')
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    return render(request, 'home.html')
