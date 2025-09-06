@@ -1,0 +1,477 @@
+{% extends "base.html" %}
+{% load static%}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeBuilderPro - Create Professional Resumes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-card {
+            border-radius: 10px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+        
+        .company-logo {
+            height: 40px;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .company-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        .template-card {
+    		transition: transform 0.3s ease, box-shadow 0.3s ease;
+    		border: none;
+    		border-radius: 12px;
+    		overflow: hidden;
+    		height: 100%;
+    		display: flex;
+    		flex-direction: column;
+		}
+
+		#cardi img{
+			width: 100%;
+    		height: 25vh;
+    		object-fit: cover;
+    		transition: transform 0.5s ease;
+		}
+        
+        .template-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 5rem 0;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 0;
+                text-align: center;
+            }
+            
+            .display-4 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .btn-responsive {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .hero-buttons .btn {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">This resume builder gets you hired faster</h1>
+                    <p class="lead mb-4">Only 2% of resumes make it past the first round. Be in the top 2% with our professional resume templates and expert guidance.</p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'resumes:resume_create'%}" class="btn btn-primary btn-lg me-2 mb-2"><i class="fas fa-plus-circle me-1"></i> Create My Resume</a>
+                        <a href="#" class="btn btn-outline-primary btn-lg mb-2"><i class="fas fa-upload me-1"></i> Upload Your Resume</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" alt="Resume Example" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted Companies -->
+    <section class="py-5 bg-light">
+        <div class="container text-center py-4">
+            <p class="text-muted text-uppercase small mb-4">Our candidates have been hired at</p>
+            <div class="row justify-content-center align-items-center g-4">
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" class="company-logo img-fluid" alt="Apple">
+                </div>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg" class="company-logo img-fluid" alt="Amazon">
+                </div>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" class="company-logo img-fluid" alt="Google">
+                </div>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" class="company-logo img-fluid" alt="Microsoft">
+                </div>
+            </div>
+            <p class="text-muted mt-4"><i class="fas fa-users me-2"></i>26,053 resumes created today</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container py-4">
+            <h2 class="text-center section-title">Get hired fast with a powerful resume</h2>
+            <div class="row g-4 mt-3">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card card h-100 p-4">
+                        <div class="feature-icon text-primary mb-3">
+                            <i class="fas fa-bolt fa-2x"></i>
+                        </div>
+                        <h5>A better resume in minutes</h5>
+                        <p class="text-muted">Choose from our professional templates and get started fast with our intuitive editor.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card card h-100 p-4">
+                        <div class="feature-icon text-primary mb-3">
+                            <i class="fas fa-laptop-code fa-2x"></i>
+                        </div>
+                        <h5>ATS-friendly templates</h5>
+                        <p class="text-muted">Our templates are designed to beat resume scanners and get your resume seen by humans.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card card h-100 p-4">
+                        <div class="feature-icon text-primary mb-3">
+                            <i class="fas fa-edit fa-2x"></i>
+                        </div>
+                        <h5>Pre-written content</h5>
+                        <p class="text-muted">Get job-specific phrases and content suggestions written by career experts.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card card h-100 p-4">
+                        <div class="feature-icon text-primary mb-3">
+                            <i class="fas fa-sliders-h fa-2x"></i>
+                        </div>
+                        <h5>Easy edit UI</h5>
+                        <p class="text-muted">No design skills needed. Our drag-and-drop editor makes customization simple.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card card h-100 p-4">
+                        <div class="feature-icon text-primary mb-3">
+                            <i class="fas fa-trophy fa-2x"></i>
+                        </div>
+                        <h5>Beat the competition</h5>
+                        <p class="text-muted">Outperform other applicants with professionally designed, attention-grabbing resumes.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card card h-100 p-4">
+                        <div class="feature-icon text-primary mb-3">
+                            <i class="fas fa-dollar-sign fa-2x"></i>
+                        </div>
+                        <h5>Get paid more</h5>
+                        <p class="text-muted">Studies show that better resumes lead to higher salary offers and better positions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container py-4">
+            <h2 class="text-center section-title">Reviewed by the community. Trusted by professionals</h2>
+            <div class="row g-4 mt-3">
+                <div class="col-md-4">
+                    <div class="testimonial-card card h-100 p-4">
+                        <div class="mb-3 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="fst-italic">"An easy-to-use resume builder with templates that got me interviews fast. I had three callbacks in the first week!"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="flex-shrink-0">
+                                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="User" class="rounded-circle" width="50">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">Sarah Johnson</h6>
+                                <small class="text-muted">Software Engineer at Google</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card card h-100 p-4">
+                        <div class="mb-3 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="fst-italic">"Fantastic templates and pre-written phrases that helped my job hunt. The ATS optimization feature is a game-changer."</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="flex-shrink-0">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="rounded-circle" width="50">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">Michael Thompson</h6>
+                                <small class="text-muted">Marketing Director at Apple</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card card h-100 p-4">
+                        <div class="mb-3 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="fst-italic">"The resume checker is gold — it fixed all the issues with my resume and I got 3 interviews in a week after using it."</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="flex-shrink-0">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="rounded-circle" width="50">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">Emily Rodriguez</h6>
+                                <small class="text-muted">Product Manager at Amazon</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section id="templates" class="py-5">
+        <div class="container py-4">
+            <h2 class="text-center section-title">Proven Resume Templates</h2>
+            <p class="text-center text-muted mb-5">Designed to get attention from hiring managers</p>
+            <div class="row g-4" id='cardi'>
+                <div class="col-md-6 col-lg-4">
+                    <div class="template-card card">
+                        <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Classic Template">
+                        <div class="card-body">
+                            <h5 class="card-title">Classic</h5>
+                            <p class="card-text">Professional and timeless design that works for all industries.</p>
+                            <a href="#" class="btn btn-outline-primary">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="template-card card">
+                        <img src="https://images.unsplash.com/photo-1586281380117-5a60ae2050cc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Modern Template">
+                        <div class="card-body">
+                            <h5 class="card-title">Modern</h5>
+                            <p class="card-text">Clean and contemporary design for creative professionals.</p>
+                            <a href="#" class="btn btn-outline-primary">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="template-card card">
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Executive Template">
+                        <div class="card-body">
+                            <h5 class="card-title">Executive</h5>
+                            <p class="card-text">Sophisticated design for senior-level professionals and executives.</p>
+                            <a href="#" class="btn btn-outline-primary">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary">View All Templates</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container py-4">
+            <div class="row text-center g-4 ">
+                <div class="col-md-4">
+                    <div class="stat-number text-white">98%</div>
+                    <p>Success rate in getting interviews</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-number text-white">2.5x</div>
+                    <p>Faster job placement</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-number text-white">1.2M+</div>
+                    <p>Resumes created</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="mb-4">Create your job-winning resume now</h2>
+            <p class="lead mb-4">Join over 1 million users who landed their dream jobs with our resume builder</p>
+            <a href="#" class="btn btn-light btn-lg">Get Started For Free</a>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}
+
+
+
+{% comment %} {% extends "base.html" %}
+{% load static%}
+
+
+
+{% block content%}
+
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+<div class="container">
+
+<div class="intro-banner-wrap">
+	<img src="{% static "images/banners/resume banner.png" %}" class="img-fluid rounded">
+</div>
+
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+<div class="container">
+	
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+
+
+
+
+
+</body>
+</html>
+
+{% endblock%} {% endcomment %}
