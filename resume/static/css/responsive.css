@@ -1,5 +1,10 @@
 
 
+
+
+
+
+
 /*# for navbar footer and card */
 :root {
     --primary: #4361ee;
@@ -9,7 +14,10 @@
     --dark: #212529;
     --success: #4cc9f0;
 }
-        
+
+
+
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--dark);
